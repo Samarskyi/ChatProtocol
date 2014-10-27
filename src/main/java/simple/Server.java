@@ -40,13 +40,14 @@ public class Server {
             System.out.print("Server has connected!\n");
 
             out = new DataOutputStream(skt.getOutputStream());
+            System.out.println(chatMessage.serialize().length);
             out.writeInt(chatMessage.serialize().length);
             out.write(chatMessage.serialize(), 0, chatMessage.serialize().length);
             out.flush();
-
         }
         catch(Exception e) {
             System.out.print("Whoops! It didn't work!\n");
+            e.printStackTrace();
         }finally {
             try {
                 out.close();

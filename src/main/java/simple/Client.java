@@ -38,7 +38,7 @@ public class Client {
                 System.out.println(message);
             }
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.print("Whoops! It didn't work!\n");
             e.printStackTrace();
         }finally {
