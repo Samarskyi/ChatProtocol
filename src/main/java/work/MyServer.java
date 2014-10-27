@@ -12,10 +12,9 @@ public class MyServer {
 	private static Vector<MyTClient> clientsList;
 	private ServerSocket serverSocket;
     ByteArrayBuffer b;
+
 	public static void main(String[] args) throws IOException {
-
 		new MyServer();
-
 	}
 
 	public MyServer() throws IOException {
@@ -28,7 +27,7 @@ public class MyServer {
 
 			Socket    socket   = serverSocket.accept();
 			MyTClient myClient = new MyTClient(++i);
-			System.out.println("Connected"+ socket);
+			System.out.println("Connected: "+ socket);
 			
 			myClient.setSocket(socket);
 			clientsList.add(myClient);
@@ -43,8 +42,6 @@ public class MyServer {
 
 			MyTClient client = clientsList.get(i);
 			client.sendMessage(message);
-//			client.dataOutputStream.writeUTF(m);
-//			client.dataOutputStream.flush();
 
 		}
 	}
