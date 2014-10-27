@@ -16,13 +16,24 @@ public class Client {
         DataInputStream in = null;
         try {
 
-            ByteArrayBuffer byteArrayBuffer = new ByteArrayBuffer(5000);
 
             Socket skt = new Socket("localhost", 1234);
             in = new DataInputStream(skt.getInputStream());
-            System.out.print("Received string: ");
-            System.out.println(in.readInt()); // Read one line and output it
-            System.out.print("'\n");
+            System.out.print("Received size: ");
+
+            int size = in.readInt();
+
+            ByteArrayBuffer byteArrayBuffer = new ByteArrayBuffer(size);
+            if(size > 0){
+
+                System.out.println(size); // Read one line and output it
+                int current;
+                while ((current = in.read()) != -1) {
+                    byteArrayBuffer.append((byte)current);
+                }
+                String str = new String(byteArrayBuffer.toByteArray(), "UTF-8");
+                System.out.println(str);
+            }
 
         } catch (Exception e) {
             System.out.print("Whoops! It didn't work!\n");

@@ -19,17 +19,9 @@ public class Server {
         byte id = 1;
 
         int contentLength =  data.getBytes().length + 1;
-
-
         final byte[] utf8Bytes = data.getBytes("UTF-8");
+
         System.out.println("Bytes for send: " + utf8Bytes.length);
-
-        ByteArrayBuffer byteArrayBuffer = new ByteArrayBuffer(5000);
-
-        byteArrayBuffer.append(utf8Bytes.length);
-//        byteArrayBuffer.append(id);
-
-//        byteArrayBuffer.append(data.getBytes(), 0, data.length());
 
         ServerSocket srvr = null;
         Socket skt = null;
@@ -38,12 +30,12 @@ public class Server {
         try {
             srvr = new ServerSocket(1234);
             skt = srvr.accept();
+
             System.out.print("Server has connected!\n");
 
             out = new DataOutputStream(skt.getOutputStream());
-            System.out.print("Sending string: '" + data + "'\n");
-            out.write(utf8Bytes.length);
-//            out.write(contentLength);
+            out.writeInt(utf8Bytes.length);
+            out.write(utf8Bytes, 0, utf8Bytes.length);
             out.flush();
 
         }
