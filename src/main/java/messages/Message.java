@@ -13,8 +13,7 @@ public abstract class Message {
     public abstract byte[] serialize();
 
     public static Message deserialize(byte[] bytes) {
-        ByteBuffer byteBuffer = ByteBuffer.wrap(bytes, 0, 4);
-        int id = byteBuffer.getInt();
+        int id = ByteBuffer.wrap(bytes, 0, 4).getInt();
         switch (id) {
             case CHAT_MESSAGE_ID:
                 int textLength = ByteBuffer.wrap(bytes, 4, 4).getInt();
@@ -27,13 +26,13 @@ public abstract class Message {
 
             case PROFILE_MESSAGE_ID:
                 int profileNameLength = ByteBuffer.wrap(bytes, 4, 4).getInt();
-                String profileName = new String(Arrays.copyOfRange(bytes, 7, profileNameLength));
-                int avatarLength = ByteBuffer.wrap(bytes, 7 + profileNameLength, 4).getInt();
-                String avatar = new String(Arrays.copyOfRange(bytes, 11 + profileNameLength, avatarLength));
-                int bDayLength = ByteBuffer.wrap(bytes, 11 + profileNameLength + avatarLength, 4).getInt();
-                String bDay = new String(Arrays.copyOfRange(bytes, 14 + profileNameLength + avatarLength, bDayLength));
+                String profileName = new String(Arrays.copyOfRange(bytes, 8, 8 + profileNameLength));
+                int avatarLength = ByteBuffer.wrap(bytes, 9 + profileNameLength, 4).getInt();
+                String avatar = new String(Arrays.copyOfRange(bytes, 12 + profileNameLength, 12 + profileNameLength + avatarLength));
+//                int bDayLength = ByteBuffer.wrap(bytes, 11 + profileNameLength + avatarLength, 4).getInt();
+//                String bDay = new String(Arrays.copyOfRange(bytes, 14 + profileNameLength + avatarLength, bDayLength));
 
-                return new ProfileMsg(profileName, avatar, bDay);
+                return new ProfileMsg(profileName, avatar, null);
         }
         //TODO maybe i should return null message
         return null;
