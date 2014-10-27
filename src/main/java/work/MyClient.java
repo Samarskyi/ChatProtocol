@@ -11,88 +11,83 @@ import java.net.Socket;
 
 public class MyClient {
 
-	private String           str = null;
-	private Socket           socket;
-	private OutputStream     outputStream;
-	private DataOutputStream dataOutStream;
-	private BufferedReader   buffReader;
+    private String str = null;
+    private Socket socket;
+    private OutputStream outputStream;
+    private DataOutputStream dataOutStream;
+    private BufferedReader buffReader;
 
-	public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
-		new MyClient();
+        new MyClient();
 
-	}
+    }
 
-	public MyClient() throws IOException, InterruptedException {
+    public MyClient() throws IOException, InterruptedException {
 
-		socket = new Socket("127.0.0.1", 6000);
+        socket = new Socket("127.0.0.1", 6000);
 
-		outputStream = socket.getOutputStream();
-		dataOutStream = new DataOutputStream(outputStream);
+        outputStream = socket.getOutputStream();
+        dataOutStream = new DataOutputStream(outputStream);
 
-		buffReader = new BufferedReader(new InputStreamReader(System.in, "Cp1251"));
+        buffReader = new BufferedReader(new InputStreamReader(System.in, "Cp1251"));
 
-		
-		GiveMeFuckingMessage messageListener = new GiveMeFuckingMessage();
-		messageListener.setDaemon(true);
-		messageListener.start();
 
-		while (true) {
+        GiveMeFuckingMessage messageListener = new GiveMeFuckingMessage();
+        messageListener.setDaemon(true);
+        messageListener.start();
 
-			str = buffReader.readLine();
-			dataOutStream.writeUTF(str);
-			dataOutStream.flush();
-		}
-	}
+        while (true) {
 
-	
-//  get messages from other clients using server
-	class GiveMeFuckingMessage extends Thread {
+            str = buffReader.readLine();
+            dataOutStream.writeUTF(str);
+            dataOutStream.flush();
+        }
+    }
 
-		DataInputStream dataInputStream;
-		InputStream     inputStream;
+    //  get messages from other clients using server
+    class GiveMeFuckingMessage extends Thread {
 
-		
-		public GiveMeFuckingMessage() throws IOException, InterruptedException {
+        DataInputStream dataInputStream;
+        InputStream inputStream;
 
-			inputStream     = socket.getInputStream();
-			dataInputStream = new DataInputStream(inputStream);
-			Thread.sleep(1000);
-		}
 
-		
-		@Override
-		public void run() {
+        public GiveMeFuckingMessage() throws IOException, InterruptedException {
 
-			try {
-				
-				String ss = null;
-				while (true) {
+            inputStream = socket.getInputStream();
+            dataInputStream = new DataInputStream(inputStream);
+            Thread.sleep(1000);
+        }
 
-					ss = dataInputStream.readUTF();
 
-					if (ss.equals("EXIT")) {
-						dataInputStream.close();
-						socket.close();
-					}
+        @Override
+        public void run() {
 
-					System.out.println(ss);
-				}
-				
-			} catch (IOException e) {
-				System.err.println("Connection error");
-			
-			} finally {
-				try {
+            try {
 
-					socket.close();
+                String ss = null;
+                while (true) {
+                    ss = dataInputStream.readUTF();
+                    if (ss.equals("EXIT")) {
+                        dataInputStream.close();
+                        socket.close();
+                    }
 
-				} catch (IOException e) {
-					System.err.println("Socket not closed");
-				}
-			}
-		}
+                    System.out.println(ss);
+                }
 
-	}
+            } catch (IOException e) {
+                System.err.println("Connection error");
+
+            } finally {
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                    System.err.println("Socket not closed");
+                }
+            }
+        }
+
+    }
 }
 
