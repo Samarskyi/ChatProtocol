@@ -1,6 +1,7 @@
 package simple;
 
 import messages.ChatMessage;
+import messages.Message;
 import messages.ProfileMsg;
 import org.apache.http.util.ByteArrayBuffer;
 
@@ -32,9 +33,9 @@ public class Client {
                 while ((current = in.read()) != -1) {
                     byteArrayBuffer.append((byte)current);
                 }
-                String str = new String(byteArrayBuffer.toByteArray(), "UTF-8");
-                ProfileMsg profileMsg = (ProfileMsg) ChatMessage.deserialize(byteArrayBuffer.toByteArray());
-                System.out.println(profileMsg);
+//                String str = new String(byteArrayBuffer.toByteArray(), "UTF-8");
+                Message message = Message.deserialize(byteArrayBuffer.toByteArray());
+                System.out.println(message);
             }
 
         } catch (Exception e) {

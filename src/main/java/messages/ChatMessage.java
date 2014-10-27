@@ -26,17 +26,30 @@ public class ChatMessage extends Message{
 
     @Override
     public byte[] serialize() {
+
         ByteArrayBuffer bab = new ByteArrayBuffer(1024);
+
         byte[] textSize = ByteBuffer.allocate(4).putInt(mText.getBytes().length).array();
         byte[] nameSize = ByteBuffer.allocate(4).putInt(mName.getBytes().length).array();
         byte[] currentTime = ByteBuffer.allocate(8).putLong(mMessageTime.getTime()).array();
-        byte[] idSize = ByteBuffer.allocate(Message.CHAT_MESSAGE_ID).array();
+        byte[] idSize = ByteBuffer.allocate(4).putLong(Message.CHAT_MESSAGE_ID).array();
+
         bab.append(idSize, 0, idSize.length);
         bab.append(textSize, 0, nameSize.length);
         bab.append(mText.getBytes(), 0, mText.getBytes().length);
         bab.append(nameSize, 0, nameSize.length);
         bab.append(mName.getBytes(), 0, mName.getBytes().length);
         bab.append(currentTime, 0, 8);
+
         return bab.toByteArray();
+    }
+
+    @Override
+    public String toString() {
+        return "ChatMessage{" +
+                "mText='" + mText + '\'' +
+                ", mName='" + mName + '\'' +
+                ", mMessageTime=" + mMessageTime +
+                '}';
     }
 }

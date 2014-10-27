@@ -1,5 +1,6 @@
 package simple;
 
+import messages.ChatMessage;
 import messages.ProfileMsg;
 import org.apache.http.util.ByteArrayBuffer;
 
@@ -9,6 +10,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Calendar;
 
 /**
  * Created by eugenii.samarskyi on 27.10.2014.
@@ -28,7 +30,8 @@ public class Server {
         Socket skt = null;
         DataOutputStream out = null;
 
-        ProfileMsg profileMsg = new ProfileMsg("Vasia","MyAvatar","05.08.2014");
+//        ProfileMsg profileMsg = new ProfileMsg("Vasia","MyAvatar","05.08.2014");
+        ChatMessage chatMessage = new ChatMessage("Hi Jack", "Bobby", Calendar.getInstance().getTimeInMillis());
 
         try {
             srvr = new ServerSocket(1234);
@@ -37,8 +40,8 @@ public class Server {
             System.out.print("Server has connected!\n");
 
             out = new DataOutputStream(skt.getOutputStream());
-            out.writeInt(profileMsg.serialize().length);
-            out.write(profileMsg.serialize(), 0, profileMsg.serialize().length);
+            out.writeInt(chatMessage.serialize().length);
+            out.write(chatMessage.serialize(), 0, chatMessage.serialize().length);
             out.flush();
 
         }
