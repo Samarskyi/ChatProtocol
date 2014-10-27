@@ -1,5 +1,6 @@
 package simple;
 
+import messages.ProfileMsg;
 import org.apache.http.util.ByteArrayBuffer;
 
 import java.io.DataOutputStream;
@@ -21,11 +22,13 @@ public class Server {
         int contentLength =  data.getBytes().length + 1;
         final byte[] utf8Bytes = data.getBytes("UTF-8");
 
-        System.out.println("Bytes for send: " + utf8Bytes.length);
+//        System.out.println("Bytes for send: " + utf8Bytes.length);
 
         ServerSocket srvr = null;
         Socket skt = null;
         DataOutputStream out = null;
+
+        ProfileMsg profileMsg = new ProfileMsg("Vasia","MyAvatar","05.08.2014");
 
         try {
             srvr = new ServerSocket(1234);
@@ -34,8 +37,8 @@ public class Server {
             System.out.print("Server has connected!\n");
 
             out = new DataOutputStream(skt.getOutputStream());
-            out.writeInt(utf8Bytes.length);
-            out.write(utf8Bytes, 0, utf8Bytes.length);
+            out.writeInt(profileMsg.serialize().length);
+            out.write(profileMsg.serialize(), 0, profileMsg.serialize().length);
             out.flush();
 
         }

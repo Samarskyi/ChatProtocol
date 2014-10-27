@@ -1,5 +1,7 @@
 package simple;
 
+import messages.ChatMessage;
+import messages.ProfileMsg;
 import org.apache.http.util.ByteArrayBuffer;
 
 import java.io.BufferedReader;
@@ -14,15 +16,14 @@ import java.net.Socket;
 public class Client {
     public static void main(String args[]) {
         DataInputStream in = null;
-        try {
 
+        try {
 
             Socket skt = new Socket("localhost", 1234);
             in = new DataInputStream(skt.getInputStream());
             System.out.print("Received size: ");
 
             int size = in.readInt();
-
             ByteArrayBuffer byteArrayBuffer = new ByteArrayBuffer(size);
             if(size > 0){
 
@@ -32,7 +33,8 @@ public class Client {
                     byteArrayBuffer.append((byte)current);
                 }
                 String str = new String(byteArrayBuffer.toByteArray(), "UTF-8");
-                System.out.println(str);
+                ProfileMsg profileMsg = (ProfileMsg) ChatMessage.deserialize(byteArrayBuffer.toByteArray());
+                System.out.println(profileMsg);
             }
 
         } catch (Exception e) {
