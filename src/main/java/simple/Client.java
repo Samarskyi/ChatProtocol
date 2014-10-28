@@ -4,8 +4,9 @@ import messages.Message;
 import org.apache.http.util.ByteArrayBuffer;
 
 import java.io.DataInputStream;
-import java.io.IOException;
 import java.net.Socket;
+import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 /**
  * Created by eugenii.samarskyi on 27.10.2014.
@@ -16,33 +17,56 @@ public class Client {
 
         try {
 
-            Socket skt = new Socket("localhost", 1234);
-            in = new DataInputStream(skt.getInputStream());
+            Socket socket = new Socket("localhost", 1234);
             System.out.print("Received size: ");
 
-            int size = in.readInt();
-            ByteArrayBuffer byteArrayBuffer = new ByteArrayBuffer(size);
-            if(size > 0){
 
-                System.out.println(size); // Read one line and output it
-                int current;
-                while ((current = in.read()) != -1) {
-                    byteArrayBuffer.append((byte)current);
-                }
-//                String str = new String(byteArrayBuffer.toByteArray(), "UTF-8");
-                Message message = Message.deserialize(byteArrayBuffer.toByteArray());
-                System.out.println(message);
-            }
+			int position = 0;
+			int messageLength = 0;
+			ByteArrayBuffer byteArrayBuffer = new ByteArrayBuffer(4096);
+			while (!Thread.interrupted()) {
+				byte[] buffer = new byte[100];
+				int bytesRead = socket.getInputStream().read(buffer);
+				if (bytesRead > 0) {
+					System.out.println("Read some more data from socket");
+					byteArrayBuffer.append(buffer, 0, bytesRead);
+					System.out.println("bytes received: " + bytesRead);
+					System.out.println("byteArrayBuffer.length() = " + byteArrayBuffer.length());
+					while (byteArrayBuffer.length() >= position + messageLength) {
+						if (byteArrayBuffer.length() >= position + 4) {
+							messageLength = ByteBuffer.wrap(byteArrayBuffer.toByteArray(), position, 4).getInt();
+						}
+						if (byteArrayBuffer.length() >= position + messageLength) {
+							System.out.println("position = "+position);
+							System.out.println("Message Length = "+messageLength);
+							System.out.println(Message.deserialize(Arrays.copyOfRange(byteArrayBuffer.toByteArray(), position, position + messageLength)));
+							position += messageLength;
+							messageLength = 0;
+						}
+					}
+				}
+			}
+//				bytesInByteBuffer += bytesRead;
 
-        } catch (IOException e) {
+//
+//
+//					messageLength = byteBuffer.getInt(position);
+//					if (bytesInByteBuffer >= position + intByteLength + messageLength) {
+//						System.out.println(Message.deserialize(byteBuffer.get(byteBuffer.array()
+//								, intByteLength, messageLength).array()));
+//						position = position + intByteLength + messageLength;
+//						if (bytesInByteBuffer == position + intByteLength + messageLength) {
+//							byteBuffer.clear();
+//							position = 0;
+//							bytesInByteBuffer = 0;
+//						}
+//					} else {
+//						break;
+//					}
+//				}
+        } catch (Exception e) {
             System.out.print("Whoops! It didn't work!\n");
             e.printStackTrace();
-        }finally {
-            try {
-                in.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 }

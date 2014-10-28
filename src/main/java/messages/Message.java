@@ -14,7 +14,7 @@ public abstract class Message {
     public abstract int getId();
 
     public static Message deserialize(byte[] bytes) {
-        int id = ByteBuffer.wrap(bytes, 0, 4).getInt();
+        int id = ByteBuffer.wrap(bytes, 4, 4).getInt();
         switch (id) {
             case CHAT_MESSAGE_ID:
                 return new ChatMessage(bytes);

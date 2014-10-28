@@ -22,9 +22,9 @@ public class ChatMessage extends Message{
     }
 
     public ChatMessage(byte[] bytes) {
-        int nameSizeOffSet = 4;
-        int textOffSet = 8;
-        int nameOffSet = 12;
+        int nameSizeOffSet = 8;
+        int textOffSet = 12;
+        int nameOffSet = 16;
 
         int textLength = ByteBuffer.wrap(bytes, nameSizeOffSet, 4).getInt();
         mText = new String(Arrays.copyOfRange(bytes, textOffSet, textOffSet + textLength));
@@ -45,11 +45,13 @@ public class ChatMessage extends Message{
     public byte[] serialize() {
         ByteArrayBuffer bab = new ByteArrayBuffer(1024);
 
+		byte[] totalLength = ByteBuffer.allocate(4).putInt(mText.getBytes().length + mName.getBytes().length + 24).array();
         byte[] idSize = ByteBuffer.allocate(4).putInt(Message.CHAT_MESSAGE_ID).array();
         byte[] textSize = ByteBuffer.allocate(4).putInt(mText.getBytes().length).array();
         byte[] nameSize = ByteBuffer.allocate(4).putInt(mName.getBytes().length).array();
         byte[] currentTime = ByteBuffer.allocate(8).putLong(mMessageTime.getTime()).array();
 
+		bab.append(totalLength, 0, totalLength.length);
         bab.append(idSize, 0, idSize.length);
         bab.append(textSize, 0, textSize.length);
         bab.append(mText.getBytes(), 0, mText.getBytes().length);

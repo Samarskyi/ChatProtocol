@@ -20,10 +20,10 @@ public class ProfileMessage extends Message {
         this.mBday = mBday;
     }
     public ProfileMessage(byte[] bytes) {
-        int profileNameSizeOffSet = 4;
-        int profileNameOffSet = 8;
-        int avatarOffSet = 12;
-        int bDayOffSet = 16;
+        int profileNameSizeOffSet = 8;
+        int profileNameOffSet = 12;
+        int avatarOffSet = 16;
+        int bDayOffSet = 20;
 
         int profileNameLength = ByteBuffer.wrap(bytes, profileNameSizeOffSet, 4).getInt();
         mName = new String(Arrays.copyOfRange(bytes, profileNameOffSet, profileNameOffSet
@@ -52,9 +52,9 @@ public class ProfileMessage extends Message {
         byte[] avatarSize = ByteBuffer.allocate(4).putInt(mAvatar.getBytes().length).array();
         byte[] bDaySize = ByteBuffer.allocate(4).putInt(mBday.getBytes().length).array();
         byte[] id = ByteBuffer.allocate(4).putInt(Message.PROFILE_MESSAGE_ID).array();
+        byte[] totalLength = ByteBuffer.allocate(4).putInt(mName.getBytes().length + mAvatar.getBytes().length + mBday.getBytes().length + 16).array();
 
-//        byte[] totalLength = ByteBuffer.allocate(mName.getBytes().length + mAvatar.getBytes().length + mBday.getBytes().length + 16).array();
-//        bab.append(totalLength, 0, totalLength.length);
+        bab.append(totalLength, 0, totalLength.length);
         bab.append(id, 0, id.length);
         bab.append(nameSize, 0, nameSize.length);
         bab.append(mName.getBytes(), 0, mName.getBytes().length);
