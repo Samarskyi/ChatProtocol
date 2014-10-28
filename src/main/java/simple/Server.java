@@ -1,12 +1,9 @@
 package simple;
 
 import messages.ChatMessage;
-import messages.ProfileMsg;
-import org.apache.http.util.ByteArrayBuffer;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.ServerSocket;
 import java.net.Socket;

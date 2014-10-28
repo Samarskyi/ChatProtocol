@@ -4,6 +4,7 @@ import org.apache.http.util.ByteArrayBuffer;
 
 import java.nio.ByteBuffer;
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 /**
  * @author yurii.ostrovskyi
@@ -18,6 +19,22 @@ public class ChatMessage extends Message{
         mText = text;
         mName = name;
         mMessageTime = new Timestamp(timeInMillis);
+    }
+
+    public ChatMessage(byte[] bytes) {
+        int nameSizeOffSet = 4;
+        int textOffSet = 8;
+        int nameOffSet = 12;
+
+        int textLength = ByteBuffer.wrap(bytes, nameSizeOffSet, 4).getInt();
+        mText = new String(Arrays.copyOfRange(bytes, textOffSet, textOffSet + textLength));
+        int nameLength = ByteBuffer.wrap(bytes, textOffSet + textLength, 4).getInt();
+        mName = new String(Arrays.copyOfRange(bytes, nameOffSet + textLength, nameOffSet + textLength + nameLength));
+        mMessageTime = new Timestamp(ByteBuffer.wrap(bytes, nameOffSet + textLength + nameLength, 8).getLong());
+    }
+
+    public int getId(){
+        return Message.CHAT_MESSAGE_ID;
     }
 
     public String getText() {

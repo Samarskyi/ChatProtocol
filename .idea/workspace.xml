@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1d2ca969-98f0-433d-98e4-896f2e52b991" name="Default" comment="Almost ready">
+    <list default="true" id="1d2ca969-98f0-433d-98e4-896f2e52b991" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/messages/ChatMessage.java" afterPath="$PROJECT_DIR$/src/main/java/messages/ChatMessage.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simple/Client.java" afterPath="$PROJECT_DIR$/src/main/java/simple/Client.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/messages/Message.java" afterPath="$PROJECT_DIR$/src/main/java/messages/Message.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simple/Server.java" afterPath="$PROJECT_DIR$/src/main/java/simple/Server.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="D:\yuriy.ostrovskiy\IdeaProjects\MasterGitFolder\Chat\Chat-Yurii\ChatProtocol\src\main\java\messages\ProfileMsg.java" afterPath="$PROJECT_DIR$/src/main/java/messages/ProfileMessage.java" />
     </list>
     <ignored path="ChatProtocol.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,13 +31,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ProfileMsg.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/messages/ProfileMsg.java">
+      <file leaf-file-name="ProfileMessage.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/messages/ProfileMessage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.42070484" vertical-offset="115" max-vertical-offset="1054">
-              <caret line="18" column="3" selection-start-line="18" selection-start-column="3" selection-end-line="21" selection-end-column="27" />
+            <state vertical-scroll-proportion="0.561674" vertical-offset="357" max-vertical-offset="1411">
+              <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1470#1471#0" expanded="true" />
+                <element signature="e#1519#1520#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -43,9 +48,13 @@
       <file leaf-file-name="ChatMessage.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/messages/ChatMessage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="274" max-vertical-offset="935">
-              <caret line="30" column="75" selection-start-line="30" selection-start-column="75" selection-end-line="30" selection-end-column="75" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1275">
+              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1131#1132#0" expanded="true" />
+                <element signature="e#1177#1178#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -53,11 +62,9 @@
       <file leaf-file-name="Message.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/messages/Message.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="375" max-vertical-offset="969">
-              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -66,7 +73,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/simple/Server.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="986">
-              <caret line="46" column="9" selection-start-line="46" selection-start-column="9" selection-end-line="46" selection-end-column="9" />
+              <caret line="39" column="63" selection-start-line="39" selection-start-column="63" selection-end-line="39" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -76,7 +83,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/simple/Client.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="379" max-vertical-offset="833">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+              <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -95,11 +102,12 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/messages/ProfileMsg.java" />
-        <option value="$PROJECT_DIR$/src/main/java/messages/Message.java" />
         <option value="$PROJECT_DIR$/src/main/java/simple/Client.java" />
         <option value="$PROJECT_DIR$/src/main/java/simple/Server.java" />
+        <option value="$PROJECT_DIR$/src/main/java/messages/ProfileMsg.java" />
         <option value="$PROJECT_DIR$/src/main/java/messages/ChatMessage.java" />
+        <option value="$PROJECT_DIR$/src/main/java/messages/ProfileMessage.java" />
+        <option value="$PROJECT_DIR$/src/main/java/messages/Message.java" />
       </list>
     </option>
   </component>
@@ -448,7 +456,11 @@
       <created>1414428610290</created>
       <updated>1414428610290</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Working protocol">
+      <created>1414431586523</created>
+      <updated>1414431586523</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -516,7 +528,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="Almost ready" />
-    <option name="LAST_COMMIT_MESSAGE" value="Almost ready" />
+    <MESSAGE value="Working protocol" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working protocol" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -553,7 +566,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/simple/Client.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="379" max-vertical-offset="833">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -561,35 +574,39 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/simple/Server.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="986">
-          <caret line="46" column="9" selection-start-line="46" selection-start-column="9" selection-end-line="46" selection-end-column="9" />
+          <caret line="39" column="63" selection-start-line="39" selection-start-column="63" selection-end-line="39" selection-end-column="63" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/messages/Message.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="375" max-vertical-offset="969">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/messages/ChatMessage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="274" max-vertical-offset="935">
-          <caret line="30" column="75" selection-start-line="30" selection-start-column="75" selection-end-line="30" selection-end-column="75" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1275">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1131#1132#0" expanded="true" />
+            <element signature="e#1177#1178#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/messages/ProfileMsg.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/messages/ProfileMessage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42070484" vertical-offset="115" max-vertical-offset="1054">
-          <caret line="18" column="3" selection-start-line="18" selection-start-column="3" selection-end-line="21" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.561674" vertical-offset="357" max-vertical-offset="1411">
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1470#1471#0" expanded="true" />
+            <element signature="e#1519#1520#0" expanded="true" />
           </folding>
         </state>
       </provider>

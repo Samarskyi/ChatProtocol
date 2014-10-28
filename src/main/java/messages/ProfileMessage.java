@@ -3,23 +3,44 @@ package messages;
 import org.apache.http.util.ByteArrayBuffer;
 
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 /**
  * @author yurii.ostrovskyi
  */
-public class ProfileMsg extends Message {
+public class ProfileMessage extends Message {
 
     private String mName;
     private String mAvatar;
     private String mBday;
 
-    public ProfileMsg() {
-    }
-
-    public ProfileMsg(String mName, String mAvatar, String mBday) {
+    public ProfileMessage(String mName, String mAvatar, String mBday) {
         this.mName = mName;
         this.mAvatar = mAvatar;
         this.mBday = mBday;
+    }
+    public ProfileMessage(byte[] bytes) {
+        int profileNameSizeOffSet = 4;
+        int profileNameOffSet = 8;
+        int avatarOffSet = 12;
+        int bDayOffSet = 16;
+
+        int profileNameLength = ByteBuffer.wrap(bytes, profileNameSizeOffSet, 4).getInt();
+        mName = new String(Arrays.copyOfRange(bytes, profileNameOffSet, profileNameOffSet
+                + profileNameLength));
+        int avatarLength = ByteBuffer.wrap(bytes, profileNameOffSet
+                + profileNameLength, 4).getInt();
+        mAvatar = new String(Arrays.copyOfRange(bytes, avatarOffSet
+                + profileNameLength, avatarOffSet + profileNameLength + avatarLength));
+        int bDayLength = ByteBuffer.wrap(bytes, avatarOffSet
+                + profileNameLength + avatarLength, 4).getInt();
+        mBday = new String(Arrays.copyOfRange(bytes, bDayOffSet
+                + profileNameLength + avatarLength, bDayOffSet
+                + profileNameLength + avatarLength + bDayLength));
+    }
+
+    public int getId() {
+        return Message.PROFILE_MESSAGE_ID;
     }
 
     @Override

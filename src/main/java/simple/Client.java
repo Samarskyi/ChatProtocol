@@ -1,14 +1,10 @@
 package simple;
 
-import messages.ChatMessage;
 import messages.Message;
-import messages.ProfileMsg;
 import org.apache.http.util.ByteArrayBuffer;
 
-import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.Socket;
 
 /**
