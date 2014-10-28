@@ -25,7 +25,7 @@ public class Client {
 			int messageLength = 0;
 			ByteArrayBuffer byteArrayBuffer = new ByteArrayBuffer(4096);
 			while (!Thread.interrupted()) {
-				byte[] buffer = new byte[100];
+				byte[] buffer = new byte[1024];
 				int bytesRead = socket.getInputStream().read(buffer);
 				if (bytesRead > 0) {
 					System.out.println("Read some more data from socket");
@@ -40,9 +40,18 @@ public class Client {
 							System.out.println("position = "+position);
 							System.out.println("Message Length = "+messageLength);
 							System.out.println(Message.deserialize(Arrays.copyOfRange(byteArrayBuffer.toByteArray(), position, position + messageLength)));
+
+							if(byteArrayBuffer.length() == position + messageLength) {
+								System.out.println("Cleared buffer");
+								byteArrayBuffer.clear();
+								messageLength = 0;
+								position = 0;
+								break;
+							}
 							position += messageLength;
 							messageLength = 0;
 						}
+
 					}
 				}
 			}
